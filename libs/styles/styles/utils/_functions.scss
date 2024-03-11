@@ -1,0 +1,27 @@
+/**
+* Generates a list of transitions styles using a list of properties
+*/
+@function generate-transitions(
+  $properties,
+  $duration,
+  $easing
+) {
+  // Create a list to store the transitions
+  $transitions: ();
+
+  // Loop through the properties
+  @each $property in $properties {
+    // Create the transition property
+    $transition: #{ $property } #{ $duration } $easing;
+
+    // Add the transition property to the transitions list
+    $transitions: append(
+      $transitions,
+      $transition,
+      comma
+    );
+  }
+
+  // Return the transitions list
+  @return $transitions;
+}

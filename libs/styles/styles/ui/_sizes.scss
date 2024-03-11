@@ -1,0 +1,52 @@
+// IMPORTS
+// Use
+@use 'sass:math';
+
+// VARIABLES
+$responsive-sizes: (
+  xs: 400,
+  sm: 750,
+  md: 1200,
+  lg: 1440,
+  xl: 1600
+);
+
+// MIXINS
+/**
+* Generates a CSS variables for transitions
+*/
+@mixin create-responsive-size-variables(
+  $name,
+  $value
+) {
+  --#{ $name }: #{ $value };
+}
+
+/**
+* Generates CSS variables for sizes
+*/
+@mixin generate-size-variables {
+  $prefix: reponsive;
+  
+  @each $key, $value in $responsive-sizes {
+    @include create-responsive-size-variables(
+      #{ $prefix }-#{ $key },
+      $value
+    );
+  }
+}
+
+// FUNCTIONS
+/**
+* Generates a REM size value based on a PX size value
+*/
+@function rem( $px ) {
+  @return math.div( $px, 16 ) * 1rem;
+}
+
+/**
+* Gets a responsive size value from the variables based on the size name
+*/
+@function reponsive( $name ) {
+  @return var( --reponsive-#{ unquote( $name ) } );
+}

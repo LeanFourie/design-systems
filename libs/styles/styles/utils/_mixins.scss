@@ -1,0 +1,479 @@
+// IMPORTS
+// Use
+@use '../theming/colors' as color;
+@use '../ui/sizes' as size;
+@use '../ui/transitions' as transition;
+@use './functions' as func;
+
+// MIXINS
+/**
+* Sets transition properties on the applied element
+*/
+@mixin transition( $transitions... ) {
+  transition: $transitions;
+  -webkit-transition: $transitions;
+  -moz-transition: $transitions;
+  -o-transition: $transitions;
+}
+
+/**
+* Sets transform properties on the applied element
+*/
+@mixin transform( $property ) {
+  transform: $property;
+  -webkit-transform: $property;
+  -o-transform: $property;
+}
+
+/**
+* Sets animation properties on the applied element
+*/
+@mixin animation( $animation ) {
+  animation: $animation;
+  -webkit-animation: $animation;
+  -moz-animation: $animation;
+  -o-animation: $animation;
+}
+
+/**
+* Sets box-shadow properties on the applied element
+*/
+@mixin box-shadow( $shadows... ) {
+  box-shadow: $shadows;
+  -webkit-box-shadow: $shadows;
+  -moz-box-shadow: $shadows;
+  -o-box-shadow: $shadows;
+}
+
+/**
+* Sets font weight and variable font weight properties on the applied element
+*/
+@mixin font-weight( $weight ) {
+  font-weight: $weight;
+  font-variation-settings: 'wght' $weight;
+}
+
+/**
+* Applies a flex display on the applied element and centers its children
+*/
+@mixin flex-center( $justify-content: center ) {
+  display: flex;
+  align-items: center;
+  justify-content: $justify-content;
+}
+
+/**
+* Applies an inline-flex display on the applied element and centers its children
+*/
+@mixin inline-flex-center( $justify-content: center ) {
+  display: inline-flex;
+  align-items: center;
+  justify-content: $justify-content;
+}
+
+/**
+* Sets the object fit property on the applied image
+*/
+@mixin fit-image( $size ) {
+  width: 100%;
+  height: 100%;
+  object-fit: $size;
+  display: block;
+}
+
+/**
+* Applies a chosen transition style to the applied element
+*/
+@mixin transition-style(
+  $name,
+  $property: all
+) {
+  @if $name == 'base' {
+    @include transition(
+      $property
+      transition.duration( fast )
+      transition.easing( easeSimple )
+    );
+  } @else if $name == 'common' {
+    @include transition(
+      $property
+      transition.duration( medium )
+      transition.easing( easeOutQuint )
+    );
+  } @else if $name == 'collective' {
+    @include transition(
+      $property
+      transition.duration( slow )
+      transition.easing( easeInOutCubic )
+    );
+  } @else {
+    @warn 'Unknown transition style: #{ $name }';
+  }
+}
+
+/**
+* Applies a chosen transition styles to the applied element
+*/
+@mixin transition-styles(
+  $name,
+  $properties
+) {
+  @if $name == 'base' {
+    $transition-properties: func.generate-transitions(
+      $properties,
+      transition.duration( fast ),
+      transition.easing( easeSimple )
+    );
+    
+    @include transition( $transition-properties );
+  } @else if $name == 'common' {
+    @each $property in $properties {
+      $transition-properties: func.generate-transitions(
+        $properties,
+        transition.duration( medium ),
+        transition.easing( easeOutQuint )
+      );
+    }
+  } @else if $name == 'collective' {
+    @each $property in $properties {
+      $transition-properties: func.generate-transitions(
+        $properties,
+        transition.duration( slow ),
+        transition.easing( easeInOutCubic )
+      );
+    }
+  } @else {
+    @warn 'Unknown transition style: #{ $name }';
+  }
+}
+
+/**
+* Adds a skeleton loader effect to rge applied element
+*/
+@mixin skeleton-loader {
+  position: relative;
+  overflow: hidden;
+  
+  @keyframes shimmer {
+    0% {
+      opacity: 0;
+    }
+    50% {
+      opacity: 1;
+    }
+    100% {
+      opacity: 0;
+    }
+  }
+  
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 4;
+  }
+  
+  &::before {
+    background-color: color.get( grey-50 );
+  }
+  
+  &::after {
+    @include animation( shimmer 2.4s infinite ease-in-out );
+    
+    background: color.get( grey-100 );
+  }
+}
+
+/**
+* Styles the placeholder value on the applied input
+*/
+@mixin placeholder-style() {
+  // Styles
+  &::placeholder {
+    @content;
+  }
+  
+  &::-webkit-input-placeholder {
+    @content;
+  }
+  
+  &:-moz-placeholder {
+    @content;
+  }
+  
+  &::-moz-placeholder {
+    @content;
+  }
+  
+  &:-ms-input-placeholder {
+    @content;
+  }
+}
+
+/**
+* Styles the scrollbar on the applied element
+*/
+@mixin scrollbar {
+  // Width
+  &::-webkit-scrollbar {
+    width: size.rem( 10 );
+  }
+  
+  // Track
+  &::-webkit-scrollbar-track {
+    border-radius: border.radius( lg );
+    box-shadow: none;
+  }
+  
+  // Handle
+  &::-webkit-scrollbar-thumb {
+    background: color.get( grey-300 );
+    background-clip: padding-box;
+    border: solid color.get( transparent );
+    border-radius: border.radius( lg );
+    border-width:   size.rem( 8 )
+    size.rem( 4 )
+    size.rem( 8 )
+    size.rem( 2 );
+  }
+}
+
+/**
+* Adds a `max-width` media query to the applied element
+*/
+@mixin max-width( $size ) {
+  $responsive-size: size.rem(
+    map-get(
+      size.$responsive-sizes,
+      $size
+    )
+  );
+  
+  @media screen and ( max-width: $responsive-size ) {
+    @content;
+  }
+}
+
+/**
+* Adds a `min-width` media query to the applied element
+*/
+@mixin min-width( $size ) {
+  $responsive-size: size.rem(
+    map-get(
+      size.$responsive-sizes,
+      $size
+    )
+  );
+  
+  @media screen and ( min-width: $responsive-size ) {
+    @content;
+  }
+}
+
+/**
+* Makes the applied element full width keeping the scrollbar in mind
+*/
+@mixin full-width() {
+  width: calc( 100vw - ( 100vw - 100% ) );
+}
+
+/**
+* Makes the applied element full height keeping the scrollbar in mind
+*/
+@mixin full-height() {
+  width: calc( 100vh - ( 100vh - 100% ) );
+}
+
+/**
+* Centers an element using position absolute
+*/
+@mixin absolute-center( $transforms: scale( 1 ) ) {
+  // Mixins
+  @include transform(
+    translate( -50%, -50% )
+    $transforms
+  );
+  
+  // Styles
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+/**
+* Sets display grid to the applied element, then...
+* sets the auto flow to column
+*/
+@mixin content-align(
+  $align-items: flex-start,
+  $justify-content: flex-start
+) {
+  align-items: $align-items;
+  justify-content: $justify-content;
+}
+
+/**
+* Sets display grid to the applied element, then...
+* sets the auto flow to column
+*/
+@mixin grid-styles(
+  $columns: 1fr,
+  $gap: 0,
+  $align-items: flex-start,
+  $justify-content: flex-start
+) {
+  // Mixins
+  @include content-align( $align-items, $justify-content );
+
+  // Styles
+  display: grid;
+  grid-template-columns: $columns;
+  gap: size.rem( $gap );
+}
+
+/**
+* Sets display grid to the applied element, then...
+* sets the auto flow to column
+*/
+@mixin grid-auto-columns(
+  $gap: 0,
+  $justify-content: center
+) {
+  // Mixins
+  @include content-align( center, $justify-content );
+
+  // Styles
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: auto;
+  gap: size.rem( $gap );
+}
+
+/**
+* Sets display grid to the applied element, then...
+* sets the auto flow to column and...
+* aligns the content to the center
+*/
+@mixin grid-centered-columns( $gap: 0 ) {
+  @include grid-auto-columns( $gap, center );
+}
+
+/**
+* Styles hover states on desktop devices and removes them on mobile devices
+*/
+@mixin hover-styles() {
+  &:hover {
+    @include min-width( md ) {
+      @content;
+    }
+  }
+}
+
+/**
+* Styles active states on desktop devices and removes them on mobile devices
+*/
+@mixin active-styles() {
+  &:active {
+    @include min-width( md ) {
+      @content;
+    }
+  }
+}
+
+/**
+* Styles hover & active states on desktop devices and removes them on mobile devices
+*/
+@mixin hover-active-styles() {
+  &:hover,
+  &:active {
+    @include min-width( md ) {
+      @content;
+    }
+  }
+}
+
+/**
+* Creates an easy to read wrapper to style child components
+*/
+@mixin child-styles(
+  $container,
+  $child
+) {
+  .#{ $container } {
+    &__#{ $child } {
+      @content;
+    }
+  }
+}
+
+/**
+* Creates an easy to read wrapper to style child components
+*/
+@mixin children-styles(
+  $container,
+  $children
+) {
+  .#{ $container } {
+    @each $child in $children {
+      &__#{ $child } {
+        @content;
+      }
+    }
+  }
+}
+
+/**
+* Creates an easy to read wrapper to style component variants
+*/
+@mixin variant-styles(
+  $container,
+  $identifier,
+  $variant
+) {
+  &.#{ $container } {
+    &--#{ $identifier } {
+      &-#{ $variant } {
+        @content;
+      }
+    }
+  }
+}
+
+/**
+* Creates the default styles for images that are set to fill their parent
+*/
+@mixin cover-image-styles( $padding: 56.25% ) {
+  padding: $padding 0 0;
+  position: relative;
+  overflow: hidden;
+
+  &-element {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+/**
+* Sets the size of the icon component and its parent
+*/
+@mixin icon-size-styles( $icon-size ) {
+  // Styles
+  width: size.rem( $icon-size );
+  height: size.rem( $icon-size );
+
+  // Children
+  &-element {
+    // Styles
+    font-size: size.rem( $icon-size );
+
+    // Children
+    * {
+      font-size: size.rem( $icon-size );
+    }
+  }
+}

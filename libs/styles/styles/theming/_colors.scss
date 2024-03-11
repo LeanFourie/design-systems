@@ -1,0 +1,272 @@
+// VARIABLES
+$primary: (
+  25:   #F8F8F9,
+  50:   #F0F1F4,
+  100:  #E2E4E8,
+  200:  #C4C8D1,
+  300:  #A7ADBA,
+  400:  #8991A3,
+  500:  #6C768C,
+  600:  #565E70,
+  700:  #414754,
+  800:  #2B2F38,
+  900:  #16181C
+);
+
+$secondary: (
+  25:   #F8F8F9,
+  50:   #F0F1F4,
+  100:  #E2E4E8,
+  200:  #C4C8D1,
+  300:  #A7ADBA,
+  400:  #8991A3,
+  500:  #6C768C,
+  600:  #565E70,
+  700:  #414754,
+  800:  #2B2F38,
+  900:  #16181C
+);
+
+$support-1: (
+  25:   #F8F8F9,
+  50:   #F0F1F4,
+  100:  #E2E4E8,
+  200:  #C4C8D1,
+  300:  #A7ADBA,
+  400:  #8991A3,
+  500:  #6C768C,
+  600:  #565E70,
+  700:  #414754,
+  800:  #2B2F38,
+  900:  #16181C
+);
+
+$support-2: (
+  25:   #F8F8F9,
+  50:   #F0F1F4,
+  100:  #E2E4E8,
+  200:  #C4C8D1,
+  300:  #A7ADBA,
+  400:  #8991A3,
+  500:  #6C768C,
+  600:  #565E70,
+  700:  #414754,
+  800:  #2B2F38,
+  900:  #16181C
+);
+
+$support-3: (
+  25:   #F8F8F9,
+  50:   #F0F1F4,
+  100:  #E2E4E8,
+  200:  #C4C8D1,
+  300:  #A7ADBA,
+  400:  #8991A3,
+  500:  #6C768C,
+  600:  #565E70,
+  700:  #414754,
+  800:  #2B2F38,
+  900:  #16181C
+);
+
+$info: (
+  25:   #F8F8F9,
+  50:   #F0F1F4,
+  100:  #E2E4E8,
+  200:  #C4C8D1,
+  300:  #A7ADBA,
+  400:  #8991A3,
+  500:  #6C768C,
+  600:  #565E70,
+  700:  #414754,
+  800:  #2B2F38,
+  900:  #16181C
+);
+
+$success: (
+  25:   #F8F8F9,
+  50:   #F0F1F4,
+  100:  #E2E4E8,
+  200:  #C4C8D1,
+  300:  #A7ADBA,
+  400:  #8991A3,
+  500:  #6C768C,
+  600:  #565E70,
+  700:  #414754,
+  800:  #2B2F38,
+  900:  #16181C
+);
+
+$warning: (
+  25:   #F8F8F9,
+  50:   #F0F1F4,
+  100:  #E2E4E8,
+  200:  #C4C8D1,
+  300:  #A7ADBA,
+  400:  #8991A3,
+  500:  #6C768C,
+  600:  #565E70,
+  700:  #414754,
+  800:  #2B2F38,
+  900:  #16181C
+);
+
+$danger: (
+  25:   #F8F8F9,
+  50:   #F0F1F4,
+  100:  #E2E4E8,
+  200:  #C4C8D1,
+  300:  #A7ADBA,
+  400:  #8991A3,
+  500:  #6C768C,
+  600:  #565E70,
+  700:  #414754,
+  800:  #2B2F38,
+  900:  #16181C
+);
+
+$grey: (
+  25:   #F8F8F9,
+  50:   #F0F1F4,
+  100:  #E2E4E8,
+  200:  #C4C8D1,
+  300:  #A7ADBA,
+  400:  #8991A3,
+  500:  #6C768C,
+  600:  #565E70,
+  700:  #414754,
+  800:  #2B2F38,
+  900:  #16181C
+);
+
+$base: (
+  0:  #FFFFFF,
+  25: #F8F8F9,
+  50: #F0F1F4
+);
+
+$invert: (
+  0:  #16181C,
+  25: #2B2F38,
+  50: #414754
+);
+
+$neutral: (
+  white:        #FFFFFF,
+  black:        #000000,
+  transparent:  #FFFFFF00
+);
+
+$social: (
+  linkedin:   #0a66c2,
+  youtube:    #b2071d,
+  facebook:   #4267b2,
+  x:          #14171a,
+  instagram:  #d62976,
+  tiktok:     #ff0050,
+  pinterest:  #e60023
+);
+
+$palettes: (
+  'primary':      $primary,
+  'secondary':    $secondary,
+  'support-1':    $support-1,
+  'support-2':    $support-2,
+  'support-3':    $support-3,
+  'info':         $info,
+  'success':      $success,
+  'warning':      $warning,
+  'danger':       $danger,
+  'grey':         $grey,
+  'neutral':      $neutral,
+  'base':         $base,
+  'invert':       $invert,
+  'social':       $social
+);
+
+// MIXINS
+/**
+* Generates CSS variables for solid colors
+*/
+@mixin create-color-variables(
+  $name,
+  $value
+) {
+  --#{ $name }: #{ $value };
+}
+
+/**
+* Generates CSS variables for alpha colors
+*/
+@mixin create-color-variables-with-rgb(
+  $name,
+  $value
+) {
+  @include create-color-variables(
+    $name,
+    $value
+  );
+  
+  --#{ $name }-r: #{ red( $value ) };
+  --#{ $name }-g: #{ green( $value ) };
+  --#{ $name }-b: #{ blue( $value ) };
+}
+
+/**
+* Generates CSS color variables
+*/
+@mixin generate-color-variables( $values: $palettes ) {
+  // Generate solid and alpha colors for the theme colors
+  @each $prefix, $palette in $values {
+    @each $color, $value in $palette {
+      @include create-color-variables-with-rgb( #{ $prefix }-#{ $color }, $value );
+    }
+  }
+}
+
+// FUNCTIONS
+/**
+* Gets a color value from the variables based on the color name
+*/
+@function get( $name ) {
+  @return var( --#{ unquote( $name ) } );
+}
+
+/**
+* Genegrates an alpha color value based on a color name an color variable
+*/
+@function alpha(
+  $name,
+  $alpha
+) {
+  @return rgba(
+    var( --#{ unquote( $name ) }-r ),
+    var( --#{ unquote( $name ) }-g ),
+    var( --#{ unquote( $name ) }-b ),
+    $alpha
+  );
+}
+
+
+/**
+* Sets the correct social link color based on the link type
+*/
+@function social-color( $type ) {
+  @if $type == linkedin {
+    @return get( social-#{ $type } );
+  } @else if $type == youtube {
+    @return get( social-#{ $type } );
+  } @else if $type == facebook {
+    @return get( social-#{ $type } );
+  } @else if $type == x {
+    @return get( social-#{ $type } );
+  } @else if $type == instagram {
+    @return get( social-#{ $type } );
+  } @else if $type == tiktok {
+    @return get( social-#{ $type } );
+  } @else if $type == pinterest {
+    @return get( social-#{ $type } );
+  } @else {
+    @error 'Unknown type #{ $type }.';
+  }
+}

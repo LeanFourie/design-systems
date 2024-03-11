@@ -1,0 +1,63 @@
+// VARIABLES
+$radii: (
+  none:       0,
+  xs:         4,
+  xs-plus:    6,
+  sm:         8,
+  sm-plus:    10,
+  md:         12,
+  md-plus:    14,
+  lg:         16,
+  lg-plus:    18,
+  xl:         20,
+  xl-plus:    22,
+  xxl:        24,
+  xxl-plus:   26,
+  xxxl:       28,
+  xxxl-plus:  30,
+
+  min:  2,
+  max:  32
+);
+
+// MIXINS
+/**
+* Generates a CSS variables for border radii
+*/
+@mixin create-border-radius-variables(
+  $name,
+  $value
+) {
+  --#{ $name }: #{ $value };
+}
+
+/**
+* Generates CSS border variables
+*/
+@mixin generate-border-variables( $values: $radii ) {
+  $prefix: border-radius;
+
+  --border-radius-round: 50%;
+
+  @each $key, $value in $values {
+    @include create-border-radius-variables(
+      #{ $prefix }-#{ $key },
+      $value
+    );
+  }
+}
+
+// FUNCTIONS
+/**
+* Gets a border radius values from the variables based on the radius name
+*/
+@function radius( $name ) {
+  @if $name == 'round' {
+    @return var( --border-radius-#{ unquote( $name ) } );
+  } @else {
+    $radius: var( --border-radius-#{ unquote( $name ) } );
+    $value: calc( #{ $radius } / 16 * 1rem );
+
+    @return $value;
+  }
+}

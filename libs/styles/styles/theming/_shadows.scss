@@ -1,0 +1,60 @@
+$spacialSize: .25rem;
+
+$sizes: (
+  xs: calc( #{ $spacialSize } * 1 ),
+  sm: calc( #{ $spacialSize } * 2 ),
+  md: calc( #{ $spacialSize } * 3 ),
+  lg: calc( #{ $spacialSize } * 4 ),
+  xl: calc( #{ $spacialSize } * 5 )
+);
+
+// Blur
+$blur: (
+  xs: calc( #{ $spacialSize } * 2 ),
+  sm: calc( #{ $spacialSize } * 4 ),
+  md: calc( #{ $spacialSize } * 6 ),
+  lg: calc( #{ $spacialSize } * 8 ),
+  xl: calc( #{ $spacialSize } * 10 )
+);
+
+// Props
+$props: (
+  xs: 0 map-get( $sizes, xs ) map-get( $blur, xs ),
+  sm: 0 map-get( $sizes, sm ) map-get( $blur, sm ),
+  md: 0 map-get( $sizes, md ) map-get( $blur, md ),
+  lg: 0 map-get( $sizes, lg ) map-get( $blur, lg ),
+  xl: 0 map-get( $sizes, xl ) map-get( $blur, xl )
+);
+
+// MIXINS
+/**
+* Generates a CSS variables for box shadows
+*/
+@mixin create-shadow-variables(
+  $name,
+  $value
+) {
+  --#{ $name }: #{ $value };
+}
+
+/**
+* Generates CSS box shadow variables
+*/
+@mixin generate-shadow-variables( $values: $props ) {
+  $prefix: shadow;
+  
+  @each $key, $value in $props {
+    @include create-shadow-variables(
+      #{ $prefix }-#{ $key },
+      $value
+    );
+  }
+}
+
+// FUNCTIONS
+/**
+* Gets box shadow values from the variables based on the shadow name
+*/
+@function get( $name ) {
+  @return var( --shadow-#{ unquote( $name ) } );
+}

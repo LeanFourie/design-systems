@@ -1,0 +1,109 @@
+// IMPORTS
+// Use
+@use '../ui/sizes' as size;
+@use '../utils/mixins' as mixin;
+@use '../theming/colors' as color;
+@use '../theming/fonts' as font;
+
+// Imports
+@import './imports';
+
+// MIXINS
+@mixin selection-styles-scoped() {
+	color: color.get( primary-500 );
+	background: color.get( primary-100 );
+}
+
+// MIXINS
+@mixin font-size-style-scoped(
+  $font-size-desktop,
+  $font-size-tablet,
+  $font-size-mobile
+) {
+  // Styles
+	margin: 0;
+  font-size: size.rem( $font-size-desktop );
+  
+  // Media Queries
+  @include mixin.max-width( md ) {
+    font-size: size.rem( $font-size-tablet );
+  }
+  
+  @include mixin.max-width( sm ) {
+    font-size: size.rem( $font-size-mobile );
+  }
+}
+
+body {
+	margin: 0;
+
+	* {
+		box-sizing: border-box;
+		font-family: font.family( primary ), 'sans-serif';
+		-webkit-font-smoothing: antialiased;
+		
+		&::selection {
+			@include selection-styles-scoped();
+		}
+		
+		&::-moz-selection {
+			@include selection-styles-scoped();
+		}
+	}
+
+	h1 {
+		// Mixins
+		@include font-size-style-scoped( 56, 48, 40 );
+
+		// Styles
+		line-height: 1.4;
+	}
+
+	h2 {
+		// Mixins
+		@include font-size-style-scoped( 48, 40, 32 );
+
+		// Styles
+		line-height: 1.4;
+	}
+
+	h3 {
+		// Mixins
+		@include font-size-style-scoped( 40, 32, 28 );
+
+		// Styles
+		line-height: 1.3;
+	}
+
+	h4 {
+		// Mixins
+		@include font-size-style-scoped( 32, 28, 24 );
+
+		// Styles
+		line-height: 1.2;
+	}
+
+	h5 {
+		// Mixins
+		@include font-size-style-scoped( 24, 20, 18 );
+
+		// Styles
+		line-height: 1.2;
+	}
+
+	h6 {
+		// Mixins
+		@include font-size-style-scoped( 20, 18, 16 );
+
+		// Styles
+		line-height: 1.2;
+	}
+
+	p {
+		// Mixins
+		@include font-size-style-scoped( 16, 16, 14 );
+
+		// Styles
+		line-height: 1.5;
+	}
+}

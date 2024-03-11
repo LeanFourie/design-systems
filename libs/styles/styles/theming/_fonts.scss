@@ -1,0 +1,51 @@
+// VARIABLES
+$primary-font:  'Urbanist', 'Inter', 'Roboto Flex', 'Roboto',
+                -apple-system, BlinkMaxSystemFont, 'Segoe UI',
+                Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+                'Helvetica Neue', sans-serif;
+
+$secondary-font:  'Epilogue', 'Inter', 'Roboto Flex', 'Roboto',
+                  -apple-system, BlinkMaxSystemFont, 'Segoe UI',
+                  Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans',
+                  'Helvetica Neue', sans-serif;
+
+$decorative-font:  'Space Mono', monospace;
+
+$font-famalies: (
+    primary:    $primary-font,
+    secondary:  $secondary-font,
+    decorative: $decorative-font
+);
+
+// MIXINS
+/**
+* Generates a CSS variables for font-families
+*/
+@mixin create-font-family-variables(
+  $name,
+  $value
+) {
+  --#{ $name }: #{ $value };
+}
+
+/**
+* Generates CSS font variables
+*/
+@mixin generate-font-variables( $values: $font-famalies ) {
+  $prefix: font;
+  
+  @each $key, $value in $values {
+    @include create-font-family-variables(
+      #{ $prefix }-#{ $key },
+      $value
+    );
+  }
+}
+
+// FUNCTIONS
+/**
+* Gets a font family values from the variables based on the famliy name
+*/
+@function family( $name ) {
+  @return var( --font-#{ unquote( $name ) } );
+}

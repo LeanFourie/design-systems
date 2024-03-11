@@ -15,10 +15,10 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@agensea-design-systems/angular-ds": ["angular-ds/src/index.ts"],
-      "@agensea-design-systems/react-ds": ["react-ds/src/index.ts"],
+      "@agensea-design-systems/angular-ds": ["libs/angular-ds/src/index.ts"],
+      "@agensea-design-systems/react-ds": ["libs/react-ds/src/index.ts"],
       "@agensea-design-systems/stencil-ds": ["libs/stencil-ds/src/index.ts"],
-      "@agensea-design-systems/styles": ["libs/styles/src/index.ts"],
+      "@agensea-design-systems/styles": ["libs/styles/styles"],
       "@agensea-design-systems/vue-ds": ["libs/vue-ds/src/index.ts"]
     }
   },

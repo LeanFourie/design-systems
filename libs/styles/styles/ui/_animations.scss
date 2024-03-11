@@ -1,0 +1,31 @@
+@use './sizes' as size;
+@use './../utils/mixins' as mixin;
+
+/**
+* Creates a bounce effect on the applied element
+*/
+$bounce: bounce;
+@keyframes #{ $bounce } {
+	0%, 20%, 50%, 80%, 100% {
+		@include mixin.transform( translateY( 0 ) );
+	}
+	40% {
+		@include mixin.transform( translateY( size.rem( -12 ) ) );
+	}
+	60% {
+		@include mixin.transform( translateY( size.rem( -10 ) ) );
+	}
+}
+
+/**
+* Scales an element from .95x its size to 1x its size
+*/
+$scaleUp: scaleUp;
+@keyframes #{ $scaleUp } {
+	0% {
+		@include mixin.transform( scale( .95 ) );
+	}
+	100% {
+		@include mixin.transform( scale( 1 ) );
+	}
+}

@@ -1,0 +1,66 @@
+// VARIABLES
+$durations: (
+  extraFast:  140ms,
+  fast:       240ms,
+  medium:     360ms,
+  slow:       440ms,
+  extraSlow:  620ms
+);
+
+$easing: (
+  easeInOutCubic: cubic-bezier( .65, 0, .35, 1 ),
+  easeOutQuint:   cubic-bezier( .22, 1, .36, 1 ),
+  easeInOutCirc:  cubic-bezier( .85, 0, .15, 1 ),
+  easeOutCubic:   cubic-bezier( .62, .05, .01, .99 ),
+  easeSimple:     cubic-bezier( .29, .30, .20, .94 ),
+  easeInDrastic:  cubic-bezier( .4, 0, 0, 1 ),
+  linear:         linear
+);
+
+
+// MIXINS
+/**
+* Generates a CSS variables for transitions
+*/
+@mixin create-transition-variables(
+  $name,
+  $value
+) {
+  --#{ $name }: #{ $value };
+}
+
+/**
+* Generates CSS transition variables
+*/
+@mixin generate-transition-variables {
+  // Get the transition values
+  $transitions: (
+    'duration': $durations,
+    'easing':  $easing
+  );
+  
+  // Generate the CSS variables
+  @each $prefix, $transition in $transitions {
+    @each $key, $value in $transition {
+      @include create-transition-variables(
+        #{ $prefix }-#{ $key },
+        $value
+      );
+    }
+  }
+}
+
+// FUNCTIONS
+/**
+* Gets a transition easing value from the variables based on the easing name
+*/
+@function easing( $name ) {
+  @return var( --easing-#{ unquote( $name ) } );
+}
+
+/**
+* Gets a transition duration value from the variables based on the duration name
+*/
+@function duration( $name ) {
+  @return var( --duration-#{ unquote( $name ) } );
+}
