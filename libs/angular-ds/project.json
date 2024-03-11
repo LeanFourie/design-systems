@@ -1,0 +1,26 @@
+{
+  "name": "angular-ds",
+  "$schema": "../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "angular-ds/src",
+  "prefix": "agensea-design-systems",
+  "tags": [],
+  "projectType": "library",
+  "targets": {
+    "build": {
+      "executor": "@nx/angular:ng-packagr-lite",
+      "outputs": ["{workspaceRoot}/dist/{projectRoot}"],
+      "options": {
+        "project": "angular-ds/ng-package.json"
+      },
+      "configurations": {
+        "production": {
+          "tsConfig": "angular-ds/tsconfig.lib.prod.json"
+        },
+        "development": {
+          "tsConfig": "angular-ds/tsconfig.lib.json"
+        }
+      },
+      "defaultConfiguration": "production"
+    }
+  }
+}

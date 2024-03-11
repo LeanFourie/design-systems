@@ -1,0 +1,26 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "rootDir": ".",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "importHelpers": true,
+    "target": "es2015",
+    "module": "esnext",
+    "lib": ["es2020", "dom"],
+    "skipLibCheck": true,
+    "skipDefaultLibCheck": true,
+    "baseUrl": ".",
+    "paths": {
+      "@agensea-design-systems/angular-ds": ["angular-ds/src/index.ts"],
+      "@agensea-design-systems/react-ds": ["react-ds/src/index.ts"],
+      "@agensea-design-systems/stencil-ds": ["libs/stencil-ds/src/index.ts"],
+      "@agensea-design-systems/styles": ["libs/styles/src/index.ts"],
+      "@agensea-design-systems/vue-ds": ["libs/vue-ds/src/index.ts"]
+    }
+  },
+  "exclude": ["node_modules", "tmp"]
+}
