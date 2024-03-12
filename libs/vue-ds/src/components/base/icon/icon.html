@@ -1,0 +1,30 @@
+<span :class="[
+  baseClass,
+  className || ''
+]">
+  <!-- SVG -->
+  <span
+    v-if="type === 'svg'"
+    :class="`${ baseClass }__element`"
+    ref="containerRef"
+  >
+    <img
+      :src="value"
+      ref="imageRef"
+      alt=""
+    />
+  </span>
+  <!-- ./SVG -->
+
+  <!-- Text -->
+  <span
+    v-else
+    :class="[
+      `${ baseClass }__element`,
+      'material-symbols-rounded'
+    ]"
+  >
+    {{ value }}
+  </span>
+  <!-- ./Text -->
+</span>

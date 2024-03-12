@@ -1,1 +1,21 @@
-<p>icon works!</p>
+<span [class]="getClassNames()">
+  @if (type === 'svg') {
+    <span
+      #containerRef
+      [class]="baseClass + '__element'"
+    >
+      <img
+        #imageRef
+        [src]="value"
+        alt=""
+      />
+    </span>
+  } @else {
+    <span
+      [class]="baseClass + '__element'"
+      class="material-symbols-rounded"
+    >
+      {{ value }}
+    </span>
+  }
+</span>

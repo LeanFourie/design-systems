@@ -16,7 +16,7 @@ import type {
 import type { PropsWithChildren } from 'react';
 
 // Component
-export const Text = ( props: PropsWithChildren< TTextProps > ): JSX.Element => {
+export const Text = (props: PropsWithChildren<TTextProps>): JSX.Element => {
   // #region - PROPS
   const {
     casing = 'unset',
