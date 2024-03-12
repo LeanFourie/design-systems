@@ -1,0 +1,23 @@
+@use '@agensea-design-systems/styles/theming/borders' as border;
+@use '@agensea-design-systems/styles/theming/colors' as color;
+@use '@agensea-design-systems/styles/theming/fonts' as font;
+@use '@agensea-design-systems/styles/theming/shadows' as shadow;
+@use '@agensea-design-systems/styles/ui/sizes' as size;
+@use '@agensea-design-systems/styles/ui/transitions' as transition;
+
+:root {
+  @include border.generate-border-variables();
+  @include color.generate-color-variables();
+  @include font.generate-font-variables();
+  @include shadow.generate-shadow-variables();
+  @include size.generate-size-variables();
+  @include transition.generate-transition-variables();
+  
+  --transparent: rgba( 255, 255, 255, 0 );
+}
+
+.sb-show-main {
+  &.sb-main-padded {
+    padding: 0;
+  }
+}

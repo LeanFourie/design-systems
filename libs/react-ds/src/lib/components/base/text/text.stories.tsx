@@ -1,26 +1,20 @@
 // Components
-import Text from './text.vue';
+import { Text } from './text';
 
 // Definitions
 import type {
   Meta,
   StoryObj
-} from '@storybook/vue3';
+} from '@storybook/react';
 import type { TTextProps } from './text.definitions';
 
 // Story
 export const Story: StoryObj<typeof Text> = {
-  render: (args) => ({
-    components: { Text },
-    setup() {
-      return { args };
-    },
-    template: `
-      <Text v-bind="args">
-        Design System Text
-      </Text>
-    `,
-  }),
+  render: ( args: TTextProps ) => (
+    <Text { ...args }>
+      Design System Text
+    </Text>
+  ),
   args: {
     casing: 'unset',
     className: undefined,
@@ -29,7 +23,7 @@ export const Story: StoryObj<typeof Text> = {
     style: 'unset',
     variant: 'body md',
     weight: undefined
-  } as any
+  }
 };
 
 // Meta

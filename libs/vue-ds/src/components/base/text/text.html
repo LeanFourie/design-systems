@@ -1,0 +1,14 @@
+<component
+  :is="_tag"
+  :class="[
+    baseClass,
+    `${ baseClass }--casing-${ toSnakeCase(casing) }`,
+    `${ baseClass }--decoration-${ toSnakeCase(decoration) }`,
+    `${ baseClass }--style-${ toSnakeCase(style) }`,
+    `${ baseClass }--variant-${ toSnakeCase(variant) }`,
+    `${ baseClass }--weight-${ toSnakeCase(_fontWeight || 'regular') }`,
+    className || ''
+  ]"
+>
+  <slot></slot>
+</component>

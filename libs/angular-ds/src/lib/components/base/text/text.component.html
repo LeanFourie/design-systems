@@ -1,1 +1,77 @@
-<p>text works!</p>
+<!-- HTML Tag -->
+@switch (true) {
+  @case (
+    renderAs &&
+    renderAs === 'label'
+  ) {
+    <label [class]="getClassNames()">
+      <ng-container [ngTemplateOutlet]="content" />
+    </label>
+  }
+  @case (
+    renderAs &&
+    renderAs === 'span'
+  ) {
+    <span [class]="getClassNames()">
+      <ng-container [ngTemplateOutlet]="content" />
+    </span>
+  }
+  @case (
+    this.renderAs &&
+    this.renderAs === 'caption'
+  ) {
+    <caption [class]="getClassNames()">
+      <ng-container [ngTemplateOutlet]="content" />
+    </caption>
+  }
+  @case (this.variant === 'quote') {
+    <blockquote [class]="getClassNames()">
+      <ng-container [ngTemplateOutlet]="content" />
+    </blockquote>
+  }
+  @case (this.variant === 'heading lg') {
+    <h1 [class]="getClassNames()">
+      <ng-container [ngTemplateOutlet]="content" />
+    </h1>
+  }
+  @case (this.variant === 'heading md') {
+    <h2 [class]="getClassNames()">
+      <ng-container [ngTemplateOutlet]="content" />
+    </h2>
+  }
+  @case (this.variant === 'heading sm') {
+    <h3 [class]="getClassNames()">
+      <ng-container [ngTemplateOutlet]="content" />
+    </h3>
+  }
+  @case (this.variant === 'sub-heading lg') {
+    <h4 [class]="getClassNames()">
+      <ng-container [ngTemplateOutlet]="content" />
+    </h4>
+  }
+  @case (this.variant === 'sub-heading md') {
+    <h5 [class]="getClassNames()">
+      <ng-container [ngTemplateOutlet]="content" />
+    </h5>
+  }
+  @case (
+    this.variant === 'sub-heading sm' ||
+    this.variant === 'tagline'
+  ) {
+    <h6 [class]="getClassNames()">
+      <ng-container [ngTemplateOutlet]="content" />
+    </h6>
+  }
+  @default {
+    <p [class]="getClassNames()">
+      <ng-container [ngTemplateOutlet]="content" />
+    </p>
+  }
+}
+<!-- HTML Tag -->
+
+<!-- Content -->
+<ng-template #content>
+  <ng-content />
+</ng-template>
+<!-- ./Content -->

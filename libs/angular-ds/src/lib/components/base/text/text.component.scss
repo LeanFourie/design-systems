@@ -1,7 +1,7 @@
 // IMPORTS
-@use '@agensea-design-systems/styles/theming/fonts' as font;
-@use '@agensea-design-systems/styles/ui/sizes' as size;
-@use '@agensea-design-systems/styles/utils/mixins' as mixin;
+@use 'theming/fonts' as font;
+@use 'ui/sizes' as size;
+@use 'utils/mixins' as mixin;
 
 // MIXINS
 @mixin font-sizes-scoped(
@@ -13,6 +13,10 @@
 }
 
 // STYLES
+:host {
+  display: contents;
+}
+
 .text {
   // Mixins
   @include mixin.transition-style(base);

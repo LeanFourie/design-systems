@@ -27,7 +27,6 @@
     "@nx/vue": "^18.0.8",
     "@nx/web": "18.0.8",
     "@nx/workspace": "18.0.8",
-    "@nxext/stencil": "^17.2.2",
     "@schematics/angular": "~17.1.0",
     "@stencil/core": "^4.7.0",
     "@stencil/sass": "3.0.7",

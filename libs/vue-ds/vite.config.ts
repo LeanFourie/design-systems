@@ -46,4 +46,9 @@ export default defineConfig({
       external: [],
     },
   },
+  resolve: {
+    alias: {
+      '@agensea-design-systems/styles': path.resolve(__dirname, '../styles/styles'),
+    },
+  },
 });

@@ -1,25 +1,23 @@
+// Packages & Modules
+import { argsToTemplate } from '@storybook/angular';
+
 // Components
-import Text from './text.vue';
+import { TextComp } from './text.component';
 
 // Definitions
 import type {
   Meta,
   StoryObj
-} from '@storybook/vue3';
-import type { TTextProps } from './text.definitions';
+} from '@storybook/angular';
 
 // Story
-export const Story: StoryObj<typeof Text> = {
-  render: (args) => ({
-    components: { Text },
-    setup() {
-      return { args };
-    },
+export const Story: StoryObj<TextComp> = {
+  render: (args: TextComp) => ({
+    props: { ...args },
     template: `
-      <Text v-bind="args">
+      <text-comp ${ argsToTemplate(args) }>
         Design System Text
-      </Text>
-    `,
+      </text-comp>`,
   }),
   args: {
     casing: 'unset',
@@ -29,12 +27,12 @@ export const Story: StoryObj<typeof Text> = {
     style: 'unset',
     variant: 'body md',
     weight: undefined
-  } as any
+  }
 };
 
 // Meta
-const meta: Meta<typeof Text> = {
-  component: Text,
+const meta: Meta<TextComp> = {
+  component: TextComp,
   tags: ['autodocs'],
   argTypes: {
     casing: {
