@@ -1,1 +1,9 @@
-<p>image works!</p>
+
+<div [class]="getClassNames()">
+  <img
+    [alt]="alt"
+    [class]="baseClass + '__element'"
+    [src]="src"
+    loading="lazy"
+  />
+</div>

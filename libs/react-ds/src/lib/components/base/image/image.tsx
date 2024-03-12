@@ -1,14 +1,41 @@
+// Packages & Modules
 import styles from './image.module.scss';
 
-/* eslint-disable-next-line */
-export interface ImageProps {}
+// Definitions
+import type { TImageProps } from './image.definitions';
 
-export function Image(props: ImageProps) {
+// Component
+export const Image = ( props: TImageProps ): JSX.Element => {
+  // #region - PROPS
+  const {
+    alt,
+    className,
+    fit = 'contain',
+    src
+  } = props;
+  // #endregion
+
+  // #region - VARIABLES
+  /**
+   * Sets the base class name of the component
+   */
+  const baseClass: string = 'image';
+  // #endregion
+
+  // #region - HTML
   return (
-    <div className={styles['container']}>
-      <h1>Welcome to Image!</h1>
+    <div className={`
+      ${ styles[ baseClass ] }
+      ${ styles[ `${ baseClass }--fit-${ fit }` ] }
+      ${ className ? className : '' }
+    `}>
+      <img
+        alt={ alt }
+        className={ styles[ `${ baseClass }__element` ] }
+        loading={ 'lazy' }
+        src={ src }
+      />
     </div>
   );
+  // #endregion
 }
-
-export default Image;

@@ -1,0 +1,13 @@
+
+<div :class="[
+  baseClass,
+  `${ baseClass }--fit-${ fit }`,
+  className || ''
+]">
+  <img
+    :alt="alt"
+    :class="`${ baseClass }__element`"
+    :src="src"
+    loading="lazy"
+  />
+</div>

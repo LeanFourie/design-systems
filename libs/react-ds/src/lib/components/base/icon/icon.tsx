@@ -12,20 +12,22 @@ import type { TIconProps } from './icon.definitions';
 
 // Component
 export const Icon = (props: TIconProps): JSX.Element => {
-  // PROPS
+  // #region - PROPS
   const {
     className,
     type,
     value
   } = props;
+  // #endregion
   
-  // VARIABLES
+  // #region - VARIABLES
   /**
   * Sets the base class name of the component
   */
   const baseClass: string = 'icon';
+  // #endregion
   
-  // REFS
+  // #region - REFS
   /**
   * Stores a reference to the img container
   */
@@ -34,8 +36,9 @@ export const Icon = (props: TIconProps): JSX.Element => {
   * Stores a reference to the img element
   */
   const imageRef = useRef<HTMLImageElement>(null);
+  // #endregion
   
-  // METHODS
+  // #region - METHODS
   /**
    * Converts inline images to inline SVG code.
    * 
@@ -90,14 +93,16 @@ export const Icon = (props: TIconProps): JSX.Element => {
       console.error('Error fetching or parsing SVG:', error);
     }
   }
+  // #endregion
 
-  // EFFECTS
+  // #region - EFFECTS
   useEffect(() => {
     // Check if `type` is of `'svg'` and run the inline image to svg conversion.
     if (type === 'svg') imageToSVGConversion();
   }, []);
+  // #endregion
   
-  // HTML
+  // #region - HTML
   return (
     <span className={`
       ${ styles[baseClass] }
@@ -133,4 +138,5 @@ export const Icon = (props: TIconProps): JSX.Element => {
       {/* ./Text Icon */}
     </span>
   );
+  // #endregion
 }

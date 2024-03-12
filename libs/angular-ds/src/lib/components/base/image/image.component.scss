@@ -1,6 +1,6 @@
 // IMPORTS
 // Use
-@use '@agensea/styles/utils/mixins' as mixin;
+@use 'utils/mixins' as mixin;
 
 // MIXINS
 @mixin image-fit-style-scoped( $fit ) {
